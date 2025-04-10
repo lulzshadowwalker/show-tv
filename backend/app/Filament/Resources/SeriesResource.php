@@ -27,7 +27,7 @@ class SeriesResource extends Resource
                     ->description('View and manage all the details for this series')
                     ->aside()
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('series')
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('cover')
                             ->collection(Series::MEDIA_COLLECTION_COVER)
                             ->alignCenter()
                             ->required(),

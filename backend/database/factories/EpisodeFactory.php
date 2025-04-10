@@ -24,7 +24,7 @@ class EpisodeFactory extends Factory
         return [
             'title' => fake()->sentence(rand(4, 7)),
             'description' => fake()->text(rand(150, 300)),
-            'duration' => floor(fake()->numberBetween(30, 45)),
+            'duration' => floor(fake()->numberBetween(20, 75)),
             'airtime' => fake()->sentence(rand(8, 12)),
             'series_id' => Series::factory(),
         ];
