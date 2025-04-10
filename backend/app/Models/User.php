@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\Role;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,8 +16,9 @@ use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Filament\Panel;
 
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia, FilamentUser, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
@@ -91,7 +94,7 @@ class User extends Authenticatable implements HasMedia
     {
         $fallback = 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->name);
         $this->addMediaCollection(self::MEDIA_COLLECTION_AVATAR)
-            ->fallbackUrls($fallback);
+            ->useFallbackUrl($fallback);
     }
 
     public function avatar(): Attribute
@@ -102,5 +105,15 @@ class User extends Authenticatable implements HasMedia
     public function avatarFile(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMedia(self::MEDIA_COLLECTION_AVATAR));
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->isAdmin;
     }
 }

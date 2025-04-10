@@ -54,7 +54,7 @@ class Series extends Model implements HasMedia
     {
         $fallback = 'https://placehold.co/518x768?text=' . str_replace(' ', '%20', $this->title);
         $this->addMediaCollection(self::MEDIA_COLLECTION_COVER)
-            ->fallbackUrls($fallback);
+            ->useFallbackUrl($fallback);
     }
 
     public function cover(): Attribute
