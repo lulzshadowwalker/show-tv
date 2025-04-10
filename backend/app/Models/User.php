@@ -12,11 +12,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -81,5 +83,24 @@ class User extends Authenticatable
     public function isAdmin(): Attribute
     {
         return Attribute::get(fn(): bool => $this->hasRole(Role::admin->value));
+    }
+
+    const MEDIA_COLLECTION_AVATAR = 'avatar';
+
+    public function registerMediaCollections(): void
+    {
+        $fallback = 'https://ui-avatars.com/api/?name=' . str_replace(' ', '+', $this->name);
+        $this->addMediaCollection(self::MEDIA_COLLECTION_AVATAR)
+            ->fallbackUrls($fallback);
+    }
+
+    public function avatar(): Attribute
+    {
+        return Attribute::get(fn(): string => $this->getFirstMediaUrl(self::MEDIA_COLLECTION_AVATAR));
+    }
+
+    public function avatarFile(): Attribute
+    {
+        return Attribute::get(fn() => $this->getFirstMedia(self::MEDIA_COLLECTION_AVATAR));
     }
 }
