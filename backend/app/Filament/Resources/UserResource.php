@@ -67,7 +67,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('role')
                     ->getStateUsing(fn($record) => $record->isAdmin ? 'Admin' : 'Customer')
                     ->badge()
-                    ->color(fn($state) => $state === 'Admin' ? Color::hex('#52c2fa') : Color::hex('#acff75'))
+                    ->color(fn($state) => $state === 'Admin' ? Color::hex('#52c2fa') : Color::hex('#77eb2a'))
                     ->alignCenter()
                     ->sortable(),
 

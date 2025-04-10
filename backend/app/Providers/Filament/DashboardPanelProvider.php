@@ -42,6 +42,11 @@ class DashboardPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->colors([
+                'primary' => '#7b19d8',
+            ])
+            ->darkMode(false)
+            ->brandLogo(asset('logo.svg'))
             ->navigationGroups([
                 NavigationGroup::make('Audience'),
                 NavigationGroup::make('Content Management'),
