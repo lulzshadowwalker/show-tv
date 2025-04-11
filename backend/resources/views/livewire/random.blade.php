@@ -5,9 +5,9 @@
     </section>
 
     <div class="row">
-        @foreach (range(1, 5) as $key)
-        <div class="col-lg-4 col-md-12 mb-4">
-            <x-series-card />
+        @foreach ($series as $key => $s)
+        <div class="col-lg-4 col-md-12 mb-4" :key="$key">
+            <x-series-card :series="$s" />
         </div>
         @endforeach
     </div>

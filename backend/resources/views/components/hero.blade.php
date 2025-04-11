@@ -8,10 +8,12 @@
         <div style="width: 100vw; height: 100px; position: absolute; bottom: 10rem; left: 1.4rem; z-index: 10; color: white; padding-inline-end: 1.4rem;">
             <h1 style="font-size: 3.2em; font-weight: bold; letter-spacing: -1px;">ShowTV</h1>
             <p style="font-size: 1.2rem; font-weight: light; max-width: 60ch;">The #1 streaming service for 2024 based on 2, 344, 500+ votes with more than 2300+ TV shows and 21000+ hours worth of content.</p>
-            <button class=" btn btn-primary btn-lg d-flex align-items-center gap-2 mt-3 fw-bolder">
-                Start Watching
-                <i class="bi bi-play-circle-fill"></i>
-            </button>
+            <a href="#series">
+                <button class="btn btn-primary btn-lg d-flex align-items-center gap-2 mt-3 fw-bolder">
+                    Start Watching
+                    <i class="bi bi-play-circle-fill"></i>
+                </button>
+            </a>
         </div>
 
         <div class="carousel-item active" style="height: 100%;">

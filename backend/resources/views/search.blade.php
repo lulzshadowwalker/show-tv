@@ -9,9 +9,9 @@
             <h2 class="mb-4" style="font-size: 2.8rem;">Series</h2>
 
             <div class="row">
-                @foreach (range(1, 5) as $key)
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <x-series-card />
+                @foreach ($series as $key => $s)
+                <div class="col-lg-4 col-md-12 mb-4" :key="key">
+                    <x-series-card :series="$s" />
                 </div>
                 @endforeach
             </div>
@@ -23,9 +23,9 @@
             <h2 class="mb-4" style="font-size: 2.8rem;">Episodes</h2>
 
             <div class="row">
-                @foreach (range(1, 5) as $key)
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <x-episode-card />
+                @foreach ($episodes as $key => $e)
+                <div class="col-lg-4 col-md-12 mb-4" :key="key">
+                    <x-episode-card :episode="$e" />
                 </div>
                 @endforeach
             </div>

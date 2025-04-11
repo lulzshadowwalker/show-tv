@@ -22,7 +22,7 @@ class EpisodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(rand(4, 7)),
+            'title' => fake()->sentence(rand(3, 5)),
             'description' => fake()->text(rand(150, 300)),
             'duration' => floor(fake()->numberBetween(20, 75)),
             'airtime' => fake()->sentence(rand(8, 12)),
