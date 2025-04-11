@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:showtv/screens/home/home.dart';
 import 'package:showtv/screens/login/login.dart';
 import 'package:showtv/screens/register/register.dart';
 import 'package:showtv/screens/series/series.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

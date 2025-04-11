@@ -76,6 +76,8 @@ class Series extends Model implements HasMedia
 
     public function averageDuration(): Attribute
     {
+        if ($this->episodes()->count() === 0) return Attribute::get(fn() => 0);
+
         return Attribute::get(
             fn() =>
             $this->episodes->pluck('duration')->average()

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:showtv/repositories/laravel_series_repository.dart';
 import 'package:showtv/screens/home/components/episode_list_view/episode_list_view.dart';
+import 'package:showtv/screens/home/components/recently_addded/recently_added.dart';
 import 'package:showtv/screens/home/components/series_list_view/series_list_view.dart';
 import 'package:showtv/shared/bottom_navigation_bar/bottom_navigation_bar.dart';
 
@@ -15,12 +17,17 @@ class Home extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 100),
+            FButton(
+              onPress: () => LaravelSeriesRepository().list(),
+              label: Text('Fetch Series'),
+            ),
             Container(color: Colors.grey, height: 380, width: double.infinity),
-            SeriesListView(title: 'Recently Added TV Shows'),
+            const RecentlyAdded(),
             const FDivider(),
             EpisodeListView(title: 'Episode List'),
             const FDivider(),
-            SeriesListView(title: 'Following'),
+            SeriesListView(title: 'Following', series: []),
           ],
         ),
       ),

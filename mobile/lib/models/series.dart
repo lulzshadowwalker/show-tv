@@ -1,0 +1,34 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:showtv/models/episode.dart';
+
+part 'series.freezed.dart';
+
+typedef Minute = int;
+
+@freezed
+abstract class Series with _$Series {
+  const factory Series({
+    required String title,
+    required String description,
+    required String cover,
+    required Minute averageDuration,
+    required double rating,
+    required List<Episode> episodes,
+  }) = _Series;
+
+  factory Series.fromJson(Map<String, dynamic> json) {
+    return Series(
+      title: json['attributes']['title'],
+      description: 'hello',
+      cover: json['attributes']['cover'],
+      //  TODO:
+      averageDuration:
+          0, // double.parse(json['attributes']['averageDuration']).toInt(),
+      rating: double.parse(json['attributes']['rating']),
+      episodes:
+          (json['includes']['episodes'] as List)
+              .map((episode) => Episode.fromJson(episode))
+              .toList(),
+    );
+  }
+}
