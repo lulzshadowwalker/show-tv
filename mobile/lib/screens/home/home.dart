@@ -1,9 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:showtv/shared/bottom_navigation_bar/bottom_navigation_bar.dart';
-import 'package:showtv/util/show_image.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -18,8 +15,9 @@ class Home extends StatelessWidget {
           children: [
             Container(color: Colors.grey, height: 380, width: double.infinity),
             SeriesListView(title: 'Recently Added TV Shows'),
-            
+            const FDivider(),
             LatestEpisodes(),
+            const FDivider(),
             SeriesListView(title: 'Following'),
           ],
         ),
