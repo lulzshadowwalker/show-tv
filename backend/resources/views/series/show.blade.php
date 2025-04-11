@@ -62,6 +62,7 @@
 
                         <ul class="fw-light">
                             <li>Episodes: {{ $series->episodes->count() }}</li>
+                            <li>Airtime: {{ $series->airtime }}</li>
                             <li>Episode Duration: About {{ floor($series->averageDuration) }} Minutes</li>
                             <li>Rating: {{ number_format((float)$series->rating * 100, 2, '.', '') }}% ({{ $series->likes()->count() }} ratings)</li>
                         </ul>
