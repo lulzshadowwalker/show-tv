@@ -19,6 +19,7 @@ class SeriesResource extends JsonResource
             'id' => (string) $this->id,
             'attributes' => [
                 'title' => $this->title,
+                'description' => $this->description,
                 'episode' => $this->description,
                 'cover' => $this->cover,
                 'averageDuration' => (string) $this->averageDuration,
