@@ -15,6 +15,7 @@ Route::post('/auth/login', [LoginController::class, 'login'])->name('api.auth.lo
 Route::post('/auth/register', [RegisterController::class, 'register'])->name('api.auth.register');
 Route::get('/series', [SeriesController::class, 'index'])->name('api.series.index');
 Route::get('/series/{series}', [SeriesController::class, 'show'])->name('api.series.show');
+Route::post('/series/{series}/follow', [SeriesController::class, 'follow'])->name('api.series.follow')->middleware('auth:sanctum');
 Route::get('/series/{series}/episodes', [SeriesEpisodeController::class, 'index'])->name('api.series.episodes.index');
 Route::get('/series/{series}/episodes/{episode}', [SeriesEpisodeController::class, 'show'])->name('api.series.episodes.show');
 Route::get('/episodes', [EpisodeController::class, 'index'])->name('api.episodes.index');
