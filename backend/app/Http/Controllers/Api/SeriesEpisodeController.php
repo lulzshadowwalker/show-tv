@@ -32,7 +32,7 @@ class SeriesEpisodeController extends Controller
         return EpisodeResource::make($episode);
     }
 
-    public function like(Episode $episode)
+    public function like(Series $series, Episode $episode)
     {
         if ($liked = $this->like->execute($episode)) {
             return response()->noContent(Response::HTTP_CREATED);
@@ -41,7 +41,7 @@ class SeriesEpisodeController extends Controller
         return response()->noContent(Response::HTTP_OK);
     }
 
-    public function dislike(Episode $episode)
+    public function dislike(Series $series, Episode $episode)
     {
         if ($disliked = $this->dislike->execute($episode)) {
             return response()->noContent(Response::HTTP_CREATED);
