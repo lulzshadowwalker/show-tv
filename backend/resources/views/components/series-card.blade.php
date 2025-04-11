@@ -8,7 +8,7 @@
             <h3 class="card-title fs-5 mb-1">{{ $series->title }}</h3>
             <p class="card-text fw-light mb-2" style="line-clamp: 2; -webkit-line-clamp: 2;">{{ mb_strimwidth($series->description, 0, 120, "...") }}</p>
 
-            <a href="@auth https://google.com @else {{ route('login') }} @endauth" class="btn btn-primary">Follow <i class="bi bi-plus-circle-fill ms-1"></i></a>
+            <livewire:follow-series-button :series="$series" />
         </div>
     </div>
 </a>

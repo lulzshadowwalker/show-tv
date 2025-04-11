@@ -20,6 +20,8 @@ class EpisodeLikeButtons extends Component
 
     public function like(): void
     {
+        if (! auth()->user()) return;
+
         if ($this->liked) {
             Like::where('user_id', auth()->id())->delete();
             $this->liked = false;
@@ -40,6 +42,8 @@ class EpisodeLikeButtons extends Component
 
     public function dislike(): void
     {
+        if (! auth()->user()) return;
+
         if ($this->disliked) {
             Like::where('user_id', auth()->id())->delete();
             $this->disliked = false;

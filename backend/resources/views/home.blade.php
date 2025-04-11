@@ -18,4 +18,15 @@
       @endforeach
     </div>
   </section>
+
+  @if(($follows = auth()->user()?->follows()->latest()->get()))
+  <section class="p-4">
+    <h2>Followed Series</h2>
+    <div class="d-flex overflow-scroll gap-2 mt-3">
+      @foreach ($follows as $key => $f)
+      <x-series-card :key="$key" :series="$f->followable" />
+      @endforeach
+    </div>
+  </section>
+  @endif
 </x-layout>
