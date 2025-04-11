@@ -7,7 +7,6 @@ use App\Models\Episode;
 use App\Models\Series;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 

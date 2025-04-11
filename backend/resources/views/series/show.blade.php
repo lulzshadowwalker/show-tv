@@ -3,7 +3,7 @@
         <div class="list-group series__sidebar">
             @foreach ($series->episodes as $key => $e)
             <a href="{{ route('series.show', ['series' => $series, 'episode' => $e]) }}" class="list-group-item list-group-item-action d-flex align-items-start gap-3 @if($e->id === $episode->id) active @endif" :key="$key">
-                <div class="series__sidebar__counter">{{ str_pad($key, 2, '0', STR_PAD_LEFT) }}</div>
+                <div class="series__sidebar__counter">{{ str_pad($key + 1, 2, '0', STR_PAD_LEFT) }}</div>
 
                 <div>
                     <h2 class="fs-5">{{ mb_strimwidth($e->title, 0, 32, "...")  }}</h2>
