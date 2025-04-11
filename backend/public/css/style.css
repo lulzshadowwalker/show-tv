@@ -1,0 +1,41 @@
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+    shape-margin: 1rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    inset-inline: 0;
+}
+
+.header__navbar {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(8px);
+}
+
+.home__hero {
+    height: 100dvh;
+    background-color: lightblue;
+}
+
+/* .home__hero h1 {
+    font-weight: bold;
+    letter-spacing: -1px;
+    font-size: 4.8rem;
+}
+
+.home__hero p {
+    font-size: 1.14rem;
+    max-width: 60ch;
+    letter-spacing: 0.5px;
+} */
+
+.home__hero__img {
+    object-fit: cover;
+}
