@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Builder;
 
 class Episode extends Model implements HasMedia
 {
@@ -77,5 +78,14 @@ class Episode extends Model implements HasMedia
     public function videoFile(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMedia(self::MEDIA_COLLECTION_VIDEO));
+    }
+
+    public function scopeSearch(Builder $query, string $search): void
+    {
+        $query->where('title', 'like', "%$search%")
+            ->orWhere('description', 'like', "%$search%")
+            ->orWhereHas('series', function (Builder $query) use ($search): void {
+                $query->where('title', 'like', "%$search%");
+            });
     }
 }

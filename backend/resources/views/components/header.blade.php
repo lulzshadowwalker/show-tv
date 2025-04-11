@@ -25,7 +25,7 @@
         <form class="d-flex" method="get" action="/search">
           <div class="input-group">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="q">
-            <button class="btn btn-outline-secondary" type="button" id="button-search">
+            <button class="btn btn-outline-secondary" type="button" id="button-search" data-bs-toggle="tooltip" data-bs-title="Search series and episodes">
               <i class="bi bi-search" style="display: block; transform: scaleX(-1) !important;"></i>
             </button>
           </div>

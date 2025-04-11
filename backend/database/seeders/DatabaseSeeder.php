@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin->assignRole(Role::admin);
 
-        $customers = User::factory()->count(100)->create();
+        $customers = User::factory()->count(1000)->create();
         $customers->each->assignRole(Role::customer);
 
         $customer = User::factory()->create([
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $customer->assignRole(Role::customer);
 
-        $series = Series::factory()->count(1000)->create();
+        $series = Series::factory()->count(20)->create();
         foreach ($series as $s) {
             if (rand(0, 1)) {
                 Follow::factory()->for($customer)->create([

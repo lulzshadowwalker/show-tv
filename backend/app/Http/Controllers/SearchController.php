@@ -9,9 +9,11 @@ class SearchController extends Controller
 {
     public function index()
     {
+        $q = request()->get('q');
         return view('search', [
-            'series' => Series::limit(5)->get(),
-            'episodes' => Episode::limit(5)->get(),
+            'series' => Series::search($q ?? '')->get(),
+            'episodes' => Episode::search($q ?? '')->get(),
+            'query' => $q,
         ]);
     }
 }

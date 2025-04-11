@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Builder;
 
 class Series extends Model implements HasMedia
 {
@@ -65,5 +66,11 @@ class Series extends Model implements HasMedia
     public function coverFile(): Attribute
     {
         return Attribute::get(fn() => $this->getFirstMedia(self::MEDIA_COLLECTION_COVER));
+    }
+
+    public function scopeSearch(Builder $query, string $search): void
+    {
+        $query->where('title', 'like', "%$search%")
+            ->orWhere('description', 'like', "%$search%");
     }
 }
