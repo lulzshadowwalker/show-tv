@@ -30,7 +30,7 @@ class SeriesResource extends JsonResource
             'links' => (object) [],
             'relationships' => (object) [],
             'includes' => (object) [
-                'episodes' => EpisodeResource::collection($this->episodes),
+                'episodes' => $this->mergeWhen($request->routeIs('api.series.*'), EpisodeResource::collection($this->episodes)),
                 'likes' => LikeResource::collection($this->likes),
                 'follows' => FollowResource::collection($this->follows),
             ],
