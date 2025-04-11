@@ -18,7 +18,9 @@
             <a class="nav-link" href="/series/random">Random</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="@auth {{ route('settings.profile') }} @else {{ route('login') }} @endauth">Account</a>
+            <a class="nav-link" href="@auth {{ route('settings.profile') }} @else {{ route('login') }} @endauth">
+              @auth Account @else Login @endif
+            </a>
           </li>
         </ul>
 

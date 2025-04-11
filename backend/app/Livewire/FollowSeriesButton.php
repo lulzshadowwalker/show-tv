@@ -19,7 +19,10 @@ class FollowSeriesButton extends Component
 
     public function toggle(): void
     {
-        if (! auth()->user()) return;
+        if (! auth()->user()) {
+            $this->redirect(route('login'));
+            return;
+        }
 
         if ($this->following) {
             $this->series->follows()->where('user_id', auth()->id())->delete();
