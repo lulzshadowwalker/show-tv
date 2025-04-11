@@ -34,6 +34,7 @@ class EpisodeResource extends JsonResource
             'relationships' => (object) [],
             'includes' => (object) [
                 'likes' => LikeResource::collection($this->likes),
+                'series' => $this->mergeWhen($request->routeIs('api.episodes.*'), SeriesResource::make($this->series)),
             ],
         ];
     }
