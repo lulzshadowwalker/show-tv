@@ -6,7 +6,6 @@ use App\Actions\FollowSeriesAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SeriesResource;
 use App\Models\Series;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SeriesController extends Controller
@@ -18,7 +17,7 @@ class SeriesController extends Controller
 
     public function index()
     {
-        return SeriesResource::collection(Series::all());
+        return SeriesResource::collection(Series::whereHas('episodes')->get());
     }
 
     public function show(Series $series)

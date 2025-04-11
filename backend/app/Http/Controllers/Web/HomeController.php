@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'series' => Series::latest()->get(),
+            'series' => Series::latest()->whereHas('episodes')->get(),
             'episodes' => Episode::with('series')->latest()->get(),
         ]);
     }
