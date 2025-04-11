@@ -11,7 +11,7 @@ class HomeControllerTest extends TestCase
 
     public function test_it_renders_the_page(): void
     {
-        $this->get(route('home'))
+        $this->get(route('home.index'))
             ->assertOk();
     }
 }
