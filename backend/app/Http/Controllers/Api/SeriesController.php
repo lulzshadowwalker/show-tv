@@ -17,7 +17,7 @@ class SeriesController extends Controller
 
     public function index()
     {
-        return SeriesResource::collection(Series::whereHas('episodes')->get());
+        return SeriesResource::collection(Series::all());
     }
 
     public function show(Series $series)

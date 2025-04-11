@@ -1,0 +1,1 @@
+class InvalidLoginError extends Error {}

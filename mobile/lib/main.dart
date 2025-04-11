@@ -5,6 +5,7 @@ import 'package:showtv/screens/home/home.dart';
 import 'package:showtv/screens/login/login.dart';
 import 'package:showtv/screens/register/register.dart';
 import 'package:showtv/screens/series/series.dart';
+import 'package:showtv/shared/auth_wrapper/auth_wrapper.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder:
           (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
-      home: const Home(),
+      home: const AuthWrapper(),
     );
   }
 }

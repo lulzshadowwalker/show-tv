@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:forui/forui.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:showtv/providers/profile_provider.dart';
 
-class ShowBottomNavigationBar extends StatefulWidget {
+class ShowBottomNavigationBar extends ConsumerStatefulWidget {
   const ShowBottomNavigationBar({super.key});
 
   @override
-  State<ShowBottomNavigationBar> createState() =>
+  ConsumerState<ShowBottomNavigationBar> createState() =>
       _ShowBottomNavigationBarState();
 }
 
-class _ShowBottomNavigationBarState extends State<ShowBottomNavigationBar> {
+class _ShowBottomNavigationBarState
+    extends ConsumerState<ShowBottomNavigationBar> {
   int index = 1;
 
   @override
@@ -26,7 +30,13 @@ class _ShowBottomNavigationBarState extends State<ShowBottomNavigationBar> {
         label: const Text('Search'),
       ),
       FBottomNavigationBarItem(
-        icon: FIcon(FAssets.icons.logOut),
+        icon: GestureDetector(
+          onTap: () async {
+            await FlutterSecureStorage().delete(key: 'access-token');
+            ref.invalidate(profileProvider);
+          },
+          child: FIcon(FAssets.icons.logOut),
+        ),
         label: const Text('Logout'),
       ),
     ],
