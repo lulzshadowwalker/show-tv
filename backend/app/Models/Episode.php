@@ -72,7 +72,7 @@ class Episode extends Model implements HasMedia
 
     public function video(): Attribute
     {
-        return Attribute::get(fn(): string => $this->getFirstMediaUrl(self::MEDIA_COLLECTION_VIDEO));
+        return Attribute::get(fn(): ?string => $this->getFirstMediaUrl(self::MEDIA_COLLECTION_VIDEO) ?? null);
     }
 
     public function videoFile(): Attribute

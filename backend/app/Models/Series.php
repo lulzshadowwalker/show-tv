@@ -73,4 +73,26 @@ class Series extends Model implements HasMedia
         $query->where('title', 'like', "%$search%")
             ->orWhere('description', 'like', "%$search%");
     }
+
+    public function averageDuration(): Attribute
+    {
+        return Attribute::get(
+            fn() =>
+            $this->episodes->pluck('duration')->average()
+        );
+    }
+
+    /**
+     * Returns the rating as a value between 0 and 1
+     */
+    public function rating(): Attribute
+    {
+        return Attribute::get(function () {
+            if (($total = $this->likes()->count()) === 0) {
+                return 0;
+            }
+
+            return $this->likes()->where('value', true)->count() / $total;
+        });
+    }
 }

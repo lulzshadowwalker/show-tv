@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/series/random', Random::class)->name('random.index');
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
-Route::get('/series/foo', [SeriesController::class, 'show'])->name('series.show');
+Route::get('/series/{series}/episodes/{episode?}', [SeriesController::class, 'show'])->name('series.show');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
