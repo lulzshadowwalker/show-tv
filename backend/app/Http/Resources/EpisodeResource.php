@@ -25,6 +25,8 @@ class EpisodeResource extends JsonResource
                 'thumbnail' => $this->thumbnail,
                 'video' => $this->video ?: null,
                 'rating' => (string) $this->rating,
+                'liked' => auth('sanctum')->user() && $this->likes()->where('value', true)->where('user_id', auth('sanctum')->id())->exists(),
+                'disliked' => auth('sanctum')->user() && $this->likes()->where('value', false)->where('user_id', auth('sanctum')->id())->exists(),
                 'createdAt' => $this->created_at,
                 'updatedAt' => $this->updated_at,
             ],

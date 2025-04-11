@@ -11,7 +11,6 @@ use App\Models\Like;
 class EpisodeLikeButtons extends Component
 {
     public Episode $episode;
-    //  TODO: Add liked and disliked to EpisodeResource
     public bool $liked;
     public bool $disliked;
 
