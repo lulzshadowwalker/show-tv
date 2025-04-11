@@ -45,3 +45,13 @@ img {
     bottom: 2rem;
     inset-inline-end: 2rem;
 }
+
+.hr-blur {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #ced7e0,
+        transparent 80%
+    );
+}

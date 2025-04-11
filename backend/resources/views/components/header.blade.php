@@ -22,9 +22,9 @@
           </li>
         </ul>
 
-        <form class="d-flex">
+        <form class="d-flex" method="get" action="/search">
           <div class="input-group">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="q">
             <button class="btn btn-outline-secondary" type="button" id="button-search">
               <i class="bi bi-search" style="display: block; transform: scaleX(-1) !important;"></i>
             </button>
