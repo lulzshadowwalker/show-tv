@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Actions\FollowSeriesAction;
 use App\Models\Series;
 use Livewire\Component;
 
@@ -24,16 +25,7 @@ class FollowSeriesButton extends Component
             return;
         }
 
-        if ($this->following) {
-            $this->series->follows()->where('user_id', auth()->id())->delete();
-            $this->following = false;
-            return;
-        }
-
-        $this->series->follows()->create([
-            'user_id' => auth()->id(),
-        ]);
-        $this->following = true;
+        $this->following = FollowSeriesAction::make()->execute($this->series);
     }
 
     public function render()

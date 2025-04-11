@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        if (! request()->routeIs('api.*')) return;
+
         $exceptions->render(function (NotFoundHttpException $e) {
             return response()->json([
                 'errors' => [
