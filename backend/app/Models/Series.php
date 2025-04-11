@@ -53,7 +53,7 @@ class Series extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $fallback = 'https://placehold.co/518x768?text=' . str_replace(' ', '%20', $this->title);
+        $fallback = 'https://placehold.co/518x768.png?text=' . str_replace(' ', '%20', $this->title);
         $this->addMediaCollection(self::MEDIA_COLLECTION_COVER)
             ->useFallbackUrl($fallback);
     }
