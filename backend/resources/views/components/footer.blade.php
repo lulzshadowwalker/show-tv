@@ -7,7 +7,7 @@
                 class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
                 <img src="{{ asset('logo.svg') }}" alt="logo" />
             </a>
-            <p class="text-body-secondary">&copy; 2025</p>
+            <p class="text-body-secondary">&copy; All Rights Reserved 2025</p>
         </div>
 
         <div class="col mb-3"></div>

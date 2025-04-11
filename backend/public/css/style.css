@@ -39,3 +39,9 @@ img {
 .home__hero__img {
     object-fit: cover;
 }
+
+.random__fab {
+    position: fixed;
+    bottom: 2rem;
+    inset-inline-end: 2rem;
+}

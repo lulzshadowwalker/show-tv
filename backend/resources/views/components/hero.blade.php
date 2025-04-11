@@ -9,7 +9,7 @@
             <h1 style="font-size: 3.2em; font-weight: bold; letter-spacing: -1px;">ShowTV</h1>
             <p style="font-size: 1.2rem; font-weight: light; max-width: 60ch;">The #1 streaming service for 2024 based on 2, 344, 500+ votes with more than 2300+ TV shows and 21000+ hours worth of content.</p>
             <button class=" btn btn-primary btn-lg d-flex align-items-center gap-2 mt-3 fw-bolder">
-                Watch Now
+                Start Watching
                 <i class="bi bi-play-circle-fill"></i>
             </button>
         </div>
