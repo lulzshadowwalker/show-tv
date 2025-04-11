@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 //  TODO: Rename route to home.index
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/series/random', Random::class);
+Route::get('/series/random', Random::class)->name('random.index');
 Route::get('search', [SearchController::class, 'index'])->name('search.index');
 
 Route::view('dashboard', 'dashboard')
