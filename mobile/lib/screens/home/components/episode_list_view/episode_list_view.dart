@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
+import 'package:showtv/providers/episode_provider.dart';
 
-class EpisodeListView extends StatelessWidget {
+class EpisodeListView extends ConsumerWidget {
   const EpisodeListView({required this.title, super.key});
 
   final String title;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final episodes = ref.watch(episodeProvider);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -22,36 +26,45 @@ class EpisodeListView extends StatelessWidget {
         ),
         SizedBox(
           height: 300,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: 100,
-            separatorBuilder: (context, index) => const SizedBox(width: 12),
-            itemBuilder:
-                (context, index) => Container(
-                  width: 320,
-                  padding:
-                      index != 0
-                          ? EdgeInsets.zero
-                          : EdgeInsetsDirectional.only(start: 12),
-                  child: FCard(
-                    image: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: SizedBox(
-                        height: 200,
-                        child: Image.network(
-                          'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmlsbXxlbnwwfHwwfHx8MA%3D%3D',
-                          fit: BoxFit.cover,
+          child: episodes.when(
+            data:
+                (data) => ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: data.length,
+                  separatorBuilder:
+                      (context, index) => const SizedBox(width: 12),
+                  itemBuilder: (context, index) {
+                    final e = data[index];
+
+                    return Container(
+                      width: 320,
+                      padding:
+                          index != 0
+                              ? EdgeInsets.zero
+                              : EdgeInsetsDirectional.only(start: 12),
+                      child: FCard(
+                        image: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: SizedBox(
+                            height: 200,
+                            child: Image.network(
+                              e.thumbnail,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        title: Text(e.title),
+                        subtitle: Text(
+                          e.description,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
-                    title: const Text('Gratitude'),
-                    subtitle: const Text(
-                      'The quality of being thankful; readiness to show appreciation for and to return kindness.',
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                    );
+                  },
                 ),
+            error: (error, stackTrace) => const Text('something went wrong'),
+            loading: () => const CircularProgressIndicator(),
           ),
         ),
       ],

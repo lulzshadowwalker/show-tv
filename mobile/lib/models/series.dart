@@ -19,11 +19,10 @@ abstract class Series with _$Series {
   factory Series.fromJson(Map<String, dynamic> json) {
     return Series(
       title: json['attributes']['title'],
-      description: 'hello',
+      description: json['attributes']['description'],
       cover: json['attributes']['cover'],
-      //  TODO:
       averageDuration:
-          0, // double.parse(json['attributes']['averageDuration']).toInt(),
+          double.parse(json['attributes']['averageDuration']).toInt(),
       rating: double.parse(json['attributes']['rating']),
       episodes:
           (json['includes']['episodes'] as List)
