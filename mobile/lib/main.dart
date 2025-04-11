@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:showtv/screens/home/home.dart';
 import 'package:showtv/screens/login/login.dart';
 import 'package:showtv/screens/register/register.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder:
           (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
-      home: const Register(),
+      home: const Home(),
     );
   }
 }

@@ -87,10 +87,10 @@ class _LoginState extends State<Register> {
                 // Form is valid, do something.
               },
             ),
-            const SizedBox(height: 12),
+            const FDivider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text('Already have an account?'), Text('Login')],
+              children: [Text('Already have an account? '), Text('Login')],
             ),
           ],
         ),
