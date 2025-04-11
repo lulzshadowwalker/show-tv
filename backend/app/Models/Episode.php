@@ -15,6 +15,8 @@ class Episode extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+    protected $touches = ['series'];
+
     /**
      * The attributes that are mass assignable.
      *
