@@ -5,6 +5,21 @@
     <x-auth-session-status class="text-center" :status="session('status')" />
 
     <form wire:submit="register" class="flex flex-col gap-6">
+
+        <!-- Avatar Preview -->
+        @if ($avatar)
+        <img src="{{ $avatar->temporaryUrl() }}" alt="avatar" style="border-radius: 50%; border: 1px gray solid; object-fit: cover; margin-inline: auto; min-width: 100px; min-height: 100px; max-height: 100px; max-width: 100px;">
+        @endif
+
+        <!-- Avatar -->
+        <flux:input
+            wire:model="avatar"
+            label="Avatar"
+            type="file"
+            required
+            accept="image/png, image/gif, image/jpeg"
+            autocomplete="avatar" />
+
         <!-- Name -->
         <flux:input
             wire:model="name"
@@ -13,8 +28,7 @@
             required
             autofocus
             autocomplete="name"
-            :placeholder="__('Full name')"
-        />
+            :placeholder="__('Full name')" />
 
         <!-- Email Address -->
         <flux:input
@@ -23,8 +37,7 @@
             type="email"
             required
             autocomplete="email"
-            placeholder="email@example.com"
-        />
+            placeholder="email@example.com" />
 
         <!-- Password -->
         <flux:input
@@ -33,8 +46,7 @@
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Password')"
-        />
+            :placeholder="__('Password')" />
 
         <!-- Confirm Password -->
         <flux:input
@@ -43,8 +55,7 @@
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Confirm password')"
-        />
+            :placeholder="__('Confirm password')" />
 
         <div class="flex items-center justify-end">
             <flux:button type="submit" variant="primary" class="w-full">

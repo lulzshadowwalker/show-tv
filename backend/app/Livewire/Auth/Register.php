@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.auth')]
 class Register extends Component
 {
+    use WithFileUploads;
+
+    public $avatar;
+
     public string $name = '';
 
     public string $email = '';
@@ -28,8 +33,9 @@ class Register extends Component
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'avatar' => ['required', 'image']
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -38,6 +44,8 @@ class Register extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $user->addMedia($this->avatar)->toMediaCollection(User::MEDIA_COLLECTION_AVATAR);
+
+        $this->redirect(route('home.index'));
     }
 }
