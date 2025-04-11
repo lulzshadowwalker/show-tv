@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
+import 'package:showtv/models/episode.dart';
+import 'package:showtv/models/series.dart' as models;
 import 'package:showtv/screens/series/components/episode_list_tile/episode_list_tile.dart';
 
-class Series extends StatelessWidget {
-  const Series({super.key});
+class Series extends HookWidget {
+  const Series({required this.series, this.episode, super.key});
+
+  final models.Series series;
+  final Episode? episode;
 
   @override
   Widget build(BuildContext context) {
+    final selected = useState(episode ?? series.episodes.first);
+
     return FScaffold(
       header: FHeader.nested(
         title: const Text(''),
-        prefixActions: [FHeaderAction.back(onPress: () {})],
+        prefixActions: [
+          FHeaderAction.back(onPress: () => Navigator.of(context).maybePop()),
+        ],
       ),
       contentPad: false,
       content: SingleChildScrollView(
@@ -37,7 +47,10 @@ class Series extends StatelessWidget {
                       border: Border.all(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    child: Text('45 Minutes', style: TextStyle(fontSize: 14)),
+                    child: Text(
+                      '${selected.value.duration} Minutes',
+                      style: TextStyle(fontSize: 14),
+                    ),
                   ),
                   Spacer(),
                   FButton.icon(
@@ -57,14 +70,14 @@ class Series extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome, home.',
+                    selected.value.title,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                    selected.value.description,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: Colors.grey.shade600,
@@ -74,13 +87,13 @@ class Series extends StatelessWidget {
                   const FDivider(),
 
                   Text(
-                    'The Punisher',
+                    series.title,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                    series.description,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: Colors.grey.shade600,
@@ -103,11 +116,27 @@ class Series extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  ...List.generate(
-                    20,
-                    (i) => Padding(
+                  ...Iterable<int>.generate(
+                    series.episodes.length,
+                  ).toList().map(
+                    (index) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: EpisodeListTile(),
+                      child: EpisodeListTile(
+                        episode: series.episodes[index],
+                        order: index + 1,
+                        active: selected.value.id == series.episodes[index].id,
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => Series(
+                                    series: series,
+                                    episode: series.episodes[index],
+                                  ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],

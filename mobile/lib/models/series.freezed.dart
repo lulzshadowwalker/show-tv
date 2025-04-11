@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Series {
 
- String get title; String get description; String get cover; Minute get averageDuration; double get rating; List<Episode> get episodes;
+ String get id; String get title; String get description; String get cover; Minute get averageDuration; double get rating; List<Episode> get episodes;
 /// Create a copy of Series
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $SeriesCopyWith<Series> get copyWith => _$SeriesCopyWithImpl<Series>(this as Ser
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Series&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.averageDuration, averageDuration) || other.averageDuration == averageDuration)&&(identical(other.rating, rating) || other.rating == rating)&&const DeepCollectionEquality().equals(other.episodes, episodes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Series&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.averageDuration, averageDuration) || other.averageDuration == averageDuration)&&(identical(other.rating, rating) || other.rating == rating)&&const DeepCollectionEquality().equals(other.episodes, episodes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,description,cover,averageDuration,rating,const DeepCollectionEquality().hash(episodes));
+int get hashCode => Object.hash(runtimeType,id,title,description,cover,averageDuration,rating,const DeepCollectionEquality().hash(episodes));
 
 @override
 String toString() {
-  return 'Series(title: $title, description: $description, cover: $cover, averageDuration: $averageDuration, rating: $rating, episodes: $episodes)';
+  return 'Series(id: $id, title: $title, description: $description, cover: $cover, averageDuration: $averageDuration, rating: $rating, episodes: $episodes)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $SeriesCopyWith<$Res>  {
   factory $SeriesCopyWith(Series value, $Res Function(Series) _then) = _$SeriesCopyWithImpl;
 @useResult
 $Res call({
- String title, String description, String cover, Minute averageDuration, double rating, List<Episode> episodes
+ String id, String title, String description, String cover, Minute averageDuration, double rating, List<Episode> episodes
 });
 
 
@@ -63,9 +63,10 @@ class _$SeriesCopyWithImpl<$Res>
 
 /// Create a copy of Series
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? description = null,Object? cover = null,Object? averageDuration = null,Object? rating = null,Object? episodes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = null,Object? cover = null,Object? averageDuration = null,Object? rating = null,Object? episodes = null,}) {
   return _then(_self.copyWith(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,cover: null == cover ? _self.cover : cover // ignore: cast_nullable_to_non_nullable
 as String,averageDuration: null == averageDuration ? _self.averageDuration : averageDuration // ignore: cast_nullable_to_non_nullable
@@ -82,9 +83,10 @@ as List<Episode>,
 
 
 class _Series implements Series {
-  const _Series({required this.title, required this.description, required this.cover, required this.averageDuration, required this.rating, required final  List<Episode> episodes}): _episodes = episodes;
+  const _Series({required this.id, required this.title, required this.description, required this.cover, required this.averageDuration, required this.rating, required final  List<Episode> episodes}): _episodes = episodes;
   
 
+@override final  String id;
 @override final  String title;
 @override final  String description;
 @override final  String cover;
@@ -108,16 +110,16 @@ _$SeriesCopyWith<_Series> get copyWith => __$SeriesCopyWithImpl<_Series>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Series&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.averageDuration, averageDuration) || other.averageDuration == averageDuration)&&(identical(other.rating, rating) || other.rating == rating)&&const DeepCollectionEquality().equals(other._episodes, _episodes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Series&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.averageDuration, averageDuration) || other.averageDuration == averageDuration)&&(identical(other.rating, rating) || other.rating == rating)&&const DeepCollectionEquality().equals(other._episodes, _episodes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,description,cover,averageDuration,rating,const DeepCollectionEquality().hash(_episodes));
+int get hashCode => Object.hash(runtimeType,id,title,description,cover,averageDuration,rating,const DeepCollectionEquality().hash(_episodes));
 
 @override
 String toString() {
-  return 'Series(title: $title, description: $description, cover: $cover, averageDuration: $averageDuration, rating: $rating, episodes: $episodes)';
+  return 'Series(id: $id, title: $title, description: $description, cover: $cover, averageDuration: $averageDuration, rating: $rating, episodes: $episodes)';
 }
 
 
@@ -128,7 +130,7 @@ abstract mixin class _$SeriesCopyWith<$Res> implements $SeriesCopyWith<$Res> {
   factory _$SeriesCopyWith(_Series value, $Res Function(_Series) _then) = __$SeriesCopyWithImpl;
 @override @useResult
 $Res call({
- String title, String description, String cover, Minute averageDuration, double rating, List<Episode> episodes
+ String id, String title, String description, String cover, Minute averageDuration, double rating, List<Episode> episodes
 });
 
 
@@ -145,9 +147,10 @@ class __$SeriesCopyWithImpl<$Res>
 
 /// Create a copy of Series
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? description = null,Object? cover = null,Object? averageDuration = null,Object? rating = null,Object? episodes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = null,Object? cover = null,Object? averageDuration = null,Object? rating = null,Object? episodes = null,}) {
   return _then(_Series(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,cover: null == cover ? _self.cover : cover // ignore: cast_nullable_to_non_nullable
 as String,averageDuration: null == averageDuration ? _self.averageDuration : averageDuration // ignore: cast_nullable_to_non_nullable

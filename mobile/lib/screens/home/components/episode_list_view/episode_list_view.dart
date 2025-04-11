@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
 import 'package:showtv/providers/episode_provider.dart';
+import 'package:showtv/screens/series/series.dart';
 
 class EpisodeListView extends ConsumerWidget {
   const EpisodeListView({required this.title, super.key});
@@ -25,7 +26,7 @@ class EpisodeListView extends ConsumerWidget {
           ),
         ),
         SizedBox(
-          height: 300,
+          height: 310,
           child: episodes.when(
             data:
                 (data) => ListView.separated(
@@ -36,28 +37,39 @@ class EpisodeListView extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final e = data[index];
 
-                    return Container(
-                      width: 320,
-                      padding:
-                          index != 0
-                              ? EdgeInsets.zero
-                              : EdgeInsetsDirectional.only(start: 12),
-                      child: FCard(
-                        image: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: SizedBox(
-                            height: 200,
-                            child: Image.network(
-                              e.thumbnail,
-                              fit: BoxFit.cover,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    Series(series: e.series!, episode: e),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 320,
+                        padding:
+                            index != 0
+                                ? EdgeInsets.zero
+                                : EdgeInsetsDirectional.only(start: 12),
+                        child: FCard(
+                          image: AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: SizedBox(
+                              height: 200,
+                              child: Image.network(
+                                e.thumbnail,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        title: Text(e.title),
-                        subtitle: Text(
-                          e.description,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+                          title: Text(e.title, maxLines: 2),
+                          subtitle: Text(
+                            e.description,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                     );
