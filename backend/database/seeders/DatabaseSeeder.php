@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $customer->assignRole(Role::customer);
 
-        $series = Series::factory()->count(10)->create();
+        $series = Series::factory()->count(1000)->create();
         foreach ($series as $s) {
             if (rand(0, 1)) {
                 Follow::factory()->for($customer)->create([
