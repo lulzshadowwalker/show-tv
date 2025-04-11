@@ -67,14 +67,6 @@ class EpisodeResource extends Resource
                             ->preload()
                             ->required(),
                     ]),
-
-                Forms\Components\TextInput::make('title')
-
-                    ->required(),
-
-                Forms\Components\TextInput::make('description')
-                    ->required(),
-
             ]);
     }
 
