@@ -1,6 +1,6 @@
 @props([ 'episode' ])
 
-<a href="{{ route('series.show') }}">
+<a href="{{ route('series.show', ['series' => $episode->series, 'episode' => $episode]) }}">
     <div class="card" style="min-width: 18rem;">
         <img src="{{ $episode->thumbnail }}" class="card-img-top" alt="" style="aspect-ratio: 16 / 9;">
         <div class="card-body d-flex flex-column align-items-stretch">
@@ -8,7 +8,7 @@
             <h3 class="card-title fs-5">{{ $episode->title }}</h3>
             <h4 class="text-secondary" style="font-size: 0.9rem;">{{ $episode->series->title }}</h4>
             <p class="card-text text-secondary fw-light mb-2">{{ mb_strimwidth($episode->description, 0, 120, "...") }}</p>
-            <a href="{{ route('series.show') }}" class="btn btn-primary mt-auto">Play <i class="bi bi-play-fill"></i></a>
+            <button class="btn btn-primary mt-auto">Play <i class="bi bi-play-fill"></i></button>
         </div>
     </div>
 </a>

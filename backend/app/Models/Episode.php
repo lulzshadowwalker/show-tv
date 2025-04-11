@@ -88,4 +88,15 @@ class Episode extends Model implements HasMedia
                 $query->where('title', 'like', "%$search%");
             });
     }
+
+    public function rating(): Attribute
+    {
+        return Attribute::get(function () {
+            if (($total = $this->likes()->count()) === 0) {
+                return 0;
+            }
+
+            return $this->likes()->where('value', true)->count() / $total;
+        });
+    }
 }

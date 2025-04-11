@@ -39,15 +39,7 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                     <h1 class="fw-bold">{{ $episode->title }}</h1>
-                    <div class="d-flex justify-content-end gap-1">
-                        <button class="btn btn-outline-success rounded-circle" data-bs-toggle="tooltip" data-bs-title="I like it">
-                            <i class="bi bi-hand-thumbs-up-fill"></i>
-                        </button>
-
-                        <button class="btn btn-outline-danger rounded-circle" data-bs-toggle="tooltip" data-bs-title="I don't like it">
-                            <i class="bi bi-hand-thumbs-down-fill"></i>
-                        </button>
-                    </div>
+                    <livewire:episode-like-buttons :episode="$episode" />
 
                     <!-- <button class="btn btn-outline-primary">Follow <i class="bi bi-plus-circle-fill ms-1"></i></button> -->
                 </div>
@@ -70,8 +62,8 @@
 
                         <ul class="fw-light">
                             <li>Episodes: {{ $series->episodes->count() }}</li>
-                            <li>Episode Duration: About {{ number_format((float)$series->averageDuration, 2, '.', '') }} Minutes</li>
-                            <li>Rating: {{ number_format((float)$series->averageDuration * 100, 2, '.', '') }}% ({{ $series->likes()->count() }} ratings)</li>
+                            <li>Episode Duration: About {{ floor($series->averageDuration) }} Minutes</li>
+                            <li>Rating: {{ number_format((float)$series->rating * 100, 2, '.', '') }}% ({{ $series->likes()->count() }} ratings)</li>
                         </ul>
                     </div>
                 </div>

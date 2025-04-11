@@ -1,6 +1,6 @@
 @props([ 'series' ])
 
-<a href="{{ route('series.show') }}">
+<a href="{{ route('series.show', ['series' => $series]  ) }}">
     <div class="card" style="min-width: 18rem; position: relative; aspect-ratio: 0.67;">
         <img src="{{ $series->cover }}" alt="{{ $series->title   . ' cover' }}" style="aspect-ratio: 16 / 9; position: absolute; inset: 0; object-fit: cover; height: 100%">
 
