@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Actions\DislikeEpisodeAction;
+use App\Actions\LikeEpisodeAction;
 use Livewire\Component;
 use App\Models\Episode;
 use App\Models\Like;
@@ -9,6 +11,7 @@ use App\Models\Like;
 class EpisodeLikeButtons extends Component
 {
     public Episode $episode;
+    //  TODO: Add liked and disliked to EpisodeResource
     public bool $liked;
     public bool $disliked;
 
@@ -25,21 +28,7 @@ class EpisodeLikeButtons extends Component
             return;
         }
 
-        if ($this->liked) {
-            Like::where('user_id', auth()->id())->delete();
-            $this->liked = false;
-            return;
-        }
-
-        auth()->user()->likes()->create(
-            [
-                'likeable_id' => $this->episode->id,
-                'likeable_type' => Episode::class,
-                'value' => true,
-            ]
-        );
-
-        $this->liked = true;
+        $this->liked = LikeEpisodeAction::make()->execute($this->episode);
         $this->disliked = false;
     }
 
@@ -50,22 +39,8 @@ class EpisodeLikeButtons extends Component
             return;
         }
 
-        if ($this->disliked) {
-            Like::where('user_id', auth()->id())->delete();
-            $this->disliked = false;
-            return;
-        }
-
-        auth()->user()->likes()->create(
-            [
-                'likeable_id' => $this->episode->id,
-                'likeable_type' => Episode::class,
-                'value' => false,
-            ]
-        );
-
+        $this->disliked = DislikeEpisodeAction::make()->execute($this->episode);
         $this->liked = false;
-        $this->disliked = true;
     }
 
     public function render()
