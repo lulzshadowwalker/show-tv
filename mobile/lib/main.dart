@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder:
           (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
-      home: const Series(),
+      home: const Home(),
     );
   }
 }
