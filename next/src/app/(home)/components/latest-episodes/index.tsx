@@ -17,7 +17,7 @@ export async function LatestEpisodes() {
         {episodes.map((episode, index) => (
           <li key={index} className={cn({ "ms-8": index === 0 })}>
             <Link
-              href="/series/1"
+              href="#"
               className="block aspect-[0.67] min-w-[18rem] relative rounded-md overflow-hidden group"
             >
               <Image

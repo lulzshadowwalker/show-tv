@@ -24,6 +24,7 @@ export function Header() {
             </li>
 
             <li>
+              
               <Link href="#">FAQ</Link>
             </li>
 
