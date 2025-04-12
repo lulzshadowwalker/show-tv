@@ -18,7 +18,7 @@ class EpisodeController extends Controller
 
     public function index()
     {
-        return EpisodeResource::collection(Episode::all());
+        return EpisodeResource::collection(Episode::latest()->get());
     }
 
     public function show(Episode $episode)
