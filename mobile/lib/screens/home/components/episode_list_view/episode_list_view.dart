@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forui/forui.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:showtv/providers/episode_provider.dart';
 import 'package:showtv/screens/series/series.dart';
 
@@ -76,7 +77,44 @@ class EpisodeListView extends ConsumerWidget {
                   },
                 ),
             error: (error, stackTrace) => const Text('something went wrong'),
-            loading: () => const CircularProgressIndicator(),
+            loading: () => const _ShimmerLoading(),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ShimmerLoading extends StatelessWidget {
+  const _ShimmerLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.only(left: 12, top: 12, bottom: 8),
+          height: 240,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: 99,
+            separatorBuilder: (context, index) => const SizedBox(width: 12),
+            itemBuilder: (context, index) {
+              return SizedBox(
+                width: 210 * 0.67,
+                height: 210,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey.shade400,
+                  highlightColor: Colors.grey.withAlpha(160),
+                  child: Container(
+                    width: 210 * 0.67,
+                    height: 210,
+                    color: Colors.white,
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ],

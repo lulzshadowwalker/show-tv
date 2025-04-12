@@ -6,7 +6,7 @@ import 'package:showtv/providers/series_repository_provider.dart';
 
 part 'series_provider.g.dart';
 
-@Riverpod(keepAlive: false  )
+@Riverpod(keepAlive: false)
 Future<List<Series>> series(Ref ref) async {
   final repository = ref.watch(seriesRepositoryProvider);
   final token = await FlutterSecureStorage().read(key: 'auth-token');
