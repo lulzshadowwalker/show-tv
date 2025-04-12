@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
       {
         hostname: "**.unsplash.com",
       },
+      {
+        hostname: "**.laravel.cloud",
+      },
+      {
+        hostname: "placehold.co",
+      },
     ],
   },
 };

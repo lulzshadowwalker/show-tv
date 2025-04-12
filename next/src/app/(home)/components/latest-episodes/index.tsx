@@ -1,8 +1,11 @@
+import { EpisodeRepoFactory } from "@/lib/factory/episode-repo-factory";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-export function LatestEpisodes() {
+export async function LatestEpisodes() {
+  const episodes = await EpisodeRepoFactory.make().list();
+
   return (
     <section id="latest" className="my-10">
       <h2 className="text-5xl font-semibold ms-8 mb-2">Latest Episodes</h2>
@@ -11,41 +14,36 @@ export function LatestEpisodes() {
       </p>
 
       <ul className="flex items-start gap-4 overflow-scroll">
-        {Array(500)
-          .fill(0)
-          .map((_, index) => (
-            <li key={index} className={cn({ "ms-8": index === 0 })}>
-              <Link
-                href="/series/1"
-                className="block aspect-[0.67] min-w-[18rem] relative rounded-md overflow-hidden group"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmlsbXxlbnwwfHwwfHx8MA%3D%3D"
-                  alt=""
-                  fill
-                  className="object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
-                />
+        {episodes.map((episode, index) => (
+          <li key={index} className={cn({ "ms-8": index === 0 })}>
+            <Link
+              href="/series/1"
+              className="block aspect-[0.67] min-w-[18rem] relative rounded-md overflow-hidden group"
+            >
+              <Image
+                src={episode.thumbnail}
+                alt=""
+                fill
+                className="object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+              />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent">
-                  <div className="absolute bottom-6 start-4">
-                    <h1 className="text-2xl font-bold tracking-tight text-white">
-                      ShowTV
-                    </h1>
-                    <div className="text-base font-medium text-gray-100">
-                      The Punisher
-                    </div>
-
-                    <p className="text-lg tracking-wide font-light max-w-prose text-gray-200 mt-1 line-clamp-3">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Ratione vero, recusandae minima iste eaque quos est
-                      aliquid quam labore, sint, provident harum? Atque quia
-                      ratione libero ullam perferendis expedita nemo.
-                    </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent">
+                <div className="absolute bottom-6 start-4">
+                  <h1 className="text-2xl font-bold tracking-tight text-white">
+                    {episode.title}
+                  </h1>
+                  <div className="text-base font-medium text-gray-100">
+                    {episode.series.title}
                   </div>
+
+                  <p className="text-lg tracking-wide font-light max-w-prose text-gray-200 mt-1 line-clamp-3">
+                    {episode.description}
+                  </p>
                 </div>
-              </Link>
-            </li>
-          ))}
+              </div>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );
