@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin->assignRole(Role::admin);
 
-        $customers = User::factory()->count(1000)->create();
+        $customers = User::factory()->count(10)->create();
         $customers->each->assignRole(Role::customer);
 
         $customer = User::factory()->create([
