@@ -6,11 +6,11 @@ part of 'series_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$seriesHash() => r'd29b524dfa26667f879e4151934dc1a84ae6603e';
+String _$seriesHash() => r'9923fb1643cf671e71ece504f76b9abd8e0f05aa';
 
 /// See also [series].
 @ProviderFor(series)
-final seriesProvider = AutoDisposeFutureProvider<List<Series>>.internal(
+final seriesProvider = AutoDisposeStreamProvider<List<Series>>.internal(
   series,
   name: r'seriesProvider',
   debugGetCreateSourceHash:
@@ -21,8 +21,8 @@ final seriesProvider = AutoDisposeFutureProvider<List<Series>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef SeriesRef = AutoDisposeFutureProviderRef<List<Series>>;
-String _$singleSeriesHash() => r'04c84ad34c3e0f7f6d4d2cbb556fe2f7001df3c8';
+typedef SeriesRef = AutoDisposeStreamProviderRef<List<Series>>;
+String _$singleSeriesHash() => r'877c2cd1791747df87efd92eee77e4a9316fcacf';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -82,7 +82,7 @@ class SingleSeriesFamily extends Family<AsyncValue<Series>> {
 }
 
 /// See also [singleSeries].
-class SingleSeriesProvider extends AutoDisposeFutureProvider<Series> {
+class SingleSeriesProvider extends AutoDisposeStreamProvider<Series> {
   /// See also [singleSeries].
   SingleSeriesProvider(String id)
     : this._internal(
@@ -113,7 +113,7 @@ class SingleSeriesProvider extends AutoDisposeFutureProvider<Series> {
 
   @override
   Override overrideWith(
-    FutureOr<Series> Function(SingleSeriesRef provider) create,
+    Stream<Series> Function(SingleSeriesRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -130,7 +130,7 @@ class SingleSeriesProvider extends AutoDisposeFutureProvider<Series> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<Series> createElement() {
+  AutoDisposeStreamProviderElement<Series> createElement() {
     return _SingleSeriesProviderElement(this);
   }
 
@@ -150,13 +150,13 @@ class SingleSeriesProvider extends AutoDisposeFutureProvider<Series> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin SingleSeriesRef on AutoDisposeFutureProviderRef<Series> {
+mixin SingleSeriesRef on AutoDisposeStreamProviderRef<Series> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
 class _SingleSeriesProviderElement
-    extends AutoDisposeFutureProviderElement<Series>
+    extends AutoDisposeStreamProviderElement<Series>
     with SingleSeriesRef {
   _SingleSeriesProviderElement(super.provider);
 

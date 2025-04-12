@@ -7,16 +7,21 @@ import 'package:showtv/providers/series_repository_provider.dart';
 part 'series_provider.g.dart';
 
 @Riverpod(keepAlive: false)
-Future<List<Series>> series(Ref ref) async {
-  final repository = ref.watch(seriesRepositoryProvider);
-  final token = await FlutterSecureStorage().read(key: 'auth-token');
-  return repository.list(token ?? '');
+Stream<List<Series>> series(Ref ref) async* {
+  while (true) {
+    final repository = ref.watch(seriesRepositoryProvider);
+    final token = await FlutterSecureStorage().read(key: 'auth-token');
+    yield await repository.list(token ?? '');
+    await Future.delayed(const Duration(seconds: 5));
+  }
 }
 
 @riverpod
-Future<Series> singleSeries(Ref ref, String id) async {
-  final repository = ref.watch(seriesRepositoryProvider);
-  final token = await FlutterSecureStorage().read(key: 'auth-token');
-
-  return repository.get(token ?? '', id);
+Stream<Series> singleSeries(Ref ref, String id) async* {
+  while (true) {
+    final repository = ref.watch(seriesRepositoryProvider);
+    final token = await FlutterSecureStorage().read(key: 'auth-token');
+    yield await repository.get(token ?? '', id);
+    await Future.delayed(const Duration(seconds: 5));
+  }
 }

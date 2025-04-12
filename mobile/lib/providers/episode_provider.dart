@@ -6,7 +6,10 @@ import 'package:showtv/providers/episode_repository_provider.dart';
 part 'episode_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<List<Episode>> episode(Ref ref) {
-  final repository = ref.watch(episodeRepositoryProvider);
-  return repository.list();
+Stream<List<Episode>> episode(Ref ref) async* {
+  while (true) {
+    final repository = ref.watch(episodeRepositoryProvider);
+    yield await repository.list();
+    await Future.delayed(const Duration(seconds: 5));
+  }
 }
