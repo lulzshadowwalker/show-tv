@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EpisodeResource\Pages;
 use App\Filament\Resources\EpisodeResource\RelationManagers;
+use App\Filament\Resources\EpisodeResource\RelationManagers\SeriesRelationManager;
 use App\Models\Episode;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -109,8 +110,7 @@ class EpisodeResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->slideOver(),
+                Tables\Actions\EditAction::make(),
 
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -125,7 +125,7 @@ class EpisodeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SeriesRelationManager::make(),
         ];
     }
 
@@ -133,6 +133,7 @@ class EpisodeResource extends Resource
     {
         return [
             'index' => Pages\ListEpisodes::route('/'),
+            'edit' => Pages\EditEpisode::route('/{record}/edit'),
         ];
     }
 }
