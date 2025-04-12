@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:forui/forui.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:showtv/models/episode.dart';
 import 'package:showtv/models/series.dart' as models;
+import 'package:showtv/providers/series_provider.dart';
 import 'package:showtv/screens/series/components/episode_list_tile/episode_list_tile.dart';
 import 'package:showtv/screens/series/components/follow_button/follow_button.dart';
+import 'package:showtv/screens/series/components/show_video_player/show_video_player.dart';
 
-class Series extends HookWidget {
+class Series extends HookConsumerWidget {
   const Series({required this.series, this.episode, super.key});
 
   final models.Series series;
   final Episode? episode;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final selected = useState(episode ?? series.episodes.first);
+    final _series = ref.watch(singleSeriesProvider(series.id));
 
     return FScaffold(
       header: FHeader.nested(
@@ -28,7 +32,8 @@ class Series extends HookWidget {
       content: SingleChildScrollView(
         child: Column(
           children: [
-            Container(color: Colors.grey, height: 380, width: double.infinity),
+            ShowVideoPlayer(url: selected.value.video),
+
             Padding(
               padding: const EdgeInsetsDirectional.only(
                 top: 16,
@@ -107,35 +112,48 @@ class Series extends HookWidget {
                   const FDivider(),
 
                   //
-                  Text(
-                    'Episodes',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
                   const SizedBox(height: 4),
-                  ...Iterable<int>.generate(
-                    series.episodes.length,
-                  ).toList().map(
-                    (index) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: EpisodeListTile(
-                        episode: series.episodes[index],
-                        order: index + 1,
-                        active: selected.value.id == series.episodes[index].id,
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => Series(
-                                    series: series,
-                                    episode: series.episodes[index],
-                                  ),
+                  _series.when(
+                    error: (error, stackTrace) => const SizedBox.shrink(),
+                    loading: () => const SizedBox.shrink(),
+                    data:
+                        (series) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Episodes',
+                              style: Theme.of(context).textTheme.headlineSmall
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
-                          );
-                        },
-                      ),
-                    ),
+                            ...Iterable<int>.generate(
+                              series.episodes.length,
+                            ).toList().map(
+                              (index) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                child: EpisodeListTile(
+                                  episode: series.episodes[index],
+                                  order: index + 1,
+                                  active:
+                                      selected.value.id ==
+                                      series.episodes[index].id,
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => Series(
+                                              series: series,
+                                              episode: series.episodes[index],
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                   ),
                 ],
               ),

@@ -26,7 +26,7 @@ class EpisodeListView extends ConsumerWidget {
           ),
         ),
         SizedBox(
-          height: 310,
+          height: 320,
           child: episodes.when(
             data:
                 (data) => ListView.separated(
