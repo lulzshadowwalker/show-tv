@@ -17,7 +17,7 @@ class SeriesController extends Controller
 
     public function index()
     {
-        return SeriesResource::collection(Series::all());
+        return SeriesResource::collection(Series::latest()->get());
     }
 
     public function show(Series $series)
