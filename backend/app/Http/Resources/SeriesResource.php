@@ -24,6 +24,7 @@ class SeriesResource extends JsonResource
                 'cover' => $this->cover,
                 'averageDuration' => (string) $this->averageDuration,
                 'rating' => (string) $this->rating,
+                'following' => auth('sanctum')->user() && $this->follows()->where('user_id', auth('sanctum')->id())->exists(),
                 'createdAt' => $this->created_at,
                 'updatedAt' => $this->updated_at,
             ],
