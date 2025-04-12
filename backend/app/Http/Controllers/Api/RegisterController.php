@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\TokenResource;
@@ -17,6 +18,7 @@ class RegisterController extends Controller
             'email' => $request->email(),
             'password' => $request->password(),
         ]);
+        $user->assignRole(Role::customer->value);
 
         return TokenResource::make(new AccessToken($user->createToken(config('app.name'))->plainTextToken));
     }
