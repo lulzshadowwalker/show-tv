@@ -35,7 +35,7 @@ class Register extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-            'avatar' => ['required', 'image']
+            'avatar' => ['sometimes', 'nullable', 'image']
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -44,7 +44,9 @@ class Register extends Component
 
         Auth::login($user);
 
-        $user->addMedia($this->avatar)->toMediaCollection(User::MEDIA_COLLECTION_AVATAR);
+        if ($this->avatar) {
+            $user->addMedia($this->avatar)->toMediaCollection(User::MEDIA_COLLECTION_AVATAR);
+        }
 
         $this->redirect(route('home.index'));
     }

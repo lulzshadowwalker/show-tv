@@ -16,7 +16,6 @@
             wire:model="avatar"
             label="Avatar"
             type="file"
-            required
             accept="image/png, image/gif, image/jpeg"
             autocomplete="avatar" />
 
