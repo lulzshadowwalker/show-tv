@@ -9,6 +9,7 @@ class RecentlyAdded extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final series = ref.watch(seriesProvider);
+
     return series.when(
       data:
           (data) =>

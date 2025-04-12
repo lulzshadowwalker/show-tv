@@ -116,7 +116,7 @@ class _RegisterState extends ConsumerState<Register> {
                           );
 
                           await FlutterSecureStorage().write(
-                            key: 'access-token',
+                            key: 'auth-token',
                             value: token,
                           );
 

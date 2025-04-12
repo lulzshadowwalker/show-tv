@@ -30,7 +30,7 @@ class SeriesListView extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final s = series[index];
-              if (s.episodes.isEmpty) return null;
+              // if (s.episodes.isEmpty) return null;
 
               return GestureDetector(
                 onTap: () {

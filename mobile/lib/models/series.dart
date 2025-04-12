@@ -15,6 +15,7 @@ abstract class Series with _$Series {
     required Minute averageDuration,
     required double rating,
     required List<Episode> episodes,
+    required bool following,
   }) = _Series;
 
   factory Series.fromJson(Map<String, dynamic> json) {
@@ -23,12 +24,13 @@ abstract class Series with _$Series {
       title: json['attributes']['title'],
       description: json['attributes']['description'],
       cover: json['attributes']['cover'],
+      following: json['attributes']['following'],
       averageDuration:
           double.parse(json['attributes']['averageDuration']).toInt(),
       rating: double.parse(json['attributes']['rating']),
       episodes:
-          json['includes']['series'] is List
-              ? (json['includes']['episodes'] as List)
+          json['includes']['episodes']?['data'] is List
+              ? (json['includes']['episodes']['data'] as List)
                   .map((episode) => Episode.fromJson(episode))
                   .toList()
               : [],

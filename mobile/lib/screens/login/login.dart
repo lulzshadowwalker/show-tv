@@ -9,6 +9,7 @@ import 'package:showtv/providers/auth_repository_provider.dart';
 import 'package:showtv/providers/profile_provider.dart';
 import 'package:showtv/screens/home/home.dart';
 import 'package:showtv/screens/register/register.dart';
+import 'package:showtv/shared/show_loading_spinner/show_loading_spinner.dart';
 import 'package:showtv/util/show_image.dart';
 
 class Login extends StatefulHookConsumerWidget {
@@ -58,16 +59,7 @@ class _LoginState extends ConsumerState<Login> {
             ),
             const SizedBox(height: 20),
             FButton(
-              prefix:
-                  !loading.value
-                      ? null
-                      : SizedBox(
-                        width: 12,
-                        height: 12,
-                        child: const CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      ),
+              prefix: !loading.value ? null : ShowLoadingSpinner(),
               label: const Text('Login'),
               onPress:
                   loading.value
@@ -85,7 +77,7 @@ class _LoginState extends ConsumerState<Login> {
                           );
 
                           await FlutterSecureStorage().write(
-                            key: 'access-token',
+                            key: 'auth-token',
                             value: token,
                           );
 

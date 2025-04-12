@@ -32,7 +32,7 @@ class _ShowBottomNavigationBarState
       FBottomNavigationBarItem(
         icon: GestureDetector(
           onTap: () async {
-            await FlutterSecureStorage().delete(key: 'access-token');
+            await FlutterSecureStorage().delete(key: 'auth-token');
             ref.invalidate(profileProvider);
           },
           child: FIcon(FAssets.icons.logOut),

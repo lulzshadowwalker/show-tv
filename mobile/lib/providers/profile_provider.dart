@@ -10,7 +10,7 @@ part 'profile_provider.g.dart';
 Future<User?> profile(Ref ref) async {
   final repository = ref.watch(profileRepositoryProvider);
 
-  final token = await FlutterSecureStorage().read(key: 'access-token');
+  final token = await FlutterSecureStorage().read(key: 'auth-token');
   if (token == null || token == '') return null;
 
   return repository.fetch(token);
